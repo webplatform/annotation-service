@@ -1,0 +1,2 @@
+-e .
+-e git+https://github.com/hypothesis/h@master#egg=h-master
