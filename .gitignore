@@ -1,0 +1,8 @@
+src/
+!src/pip-delete-this-directory.txt
+.pip/
+.Python
+bin/
+lib/
+include/
+notes_server.egg-info/
