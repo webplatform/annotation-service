@@ -1,0 +1,365 @@
+# Annotator core
+annotator:
+  filters: uglifyjs
+  output: lib/annotator.min.js
+  contents:
+    - h:lib/annotator.js
+
+# Annotator i18n
+gettext:
+  filters: uglifyjs
+  output: lib/gettext.min.js
+  contents:
+    - h:lib/gettext.js
+annotator_i18n:
+  filters: uglifyjs
+  output: locale/data.min.js
+  contents:
+    - h:locale/data.js
+
+# Annotator plugins maintained upstream
+annotator_auth:
+  filters: uglifyjs
+  output: lib/annotator.auth.min.js
+  contents:
+    - h:lib/annotator.auth.js
+annotator_document:
+  filters: uglifyjs
+  output: lib/annotator.document.min.js
+  contents:
+    - h:lib/annotator.document.js
+annotator_permissions:
+  filters: uglifyjs
+  output: lib/annotator.permissions.min.js
+  contents:
+    - h:lib/annotator.permissions.js
+annotator_store:
+  filters: uglifyjs
+  output: lib/annotator.store.min.js
+  contents:
+    - h:lib/annotator.store.js
+
+# Annotator plugins maintained out of tree by Hypothesis
+annotator_fuzzytextanchors:
+  filters: uglifyjs
+  output: lib/annotator.fuzzytextanchors.min.js
+  contents:
+    - h:lib/diff_match_patch_uncompressed.js
+    - h:lib/dom_text.js
+    - h:lib/annotator.domtextmapper.js
+    - h:lib/annotator.textanchors.js
+    - h:lib/annotator.fuzzytextanchors.js
+annotator_pdf:
+  filters: uglifyjs
+  output: lib/annotator.pdf.min.js
+  contents:
+    - h:lib/page_text_mapper_core.js
+    - h:lib/annotator.pdf.js
+annotator_textanchors:
+  filters: uglifyjs
+  output: lib/annotator.textanchors.min.js
+  contents:
+    - h:lib/annotator.textanchors.js
+annotator_textrange:
+  filters: uglifyjs
+  output: lib/annotator.textrange.min.js
+  contents:
+    - h:lib/annotator.textrange.js
+annotator_textposition:
+  filters: uglifyjs
+  output: lib/annotator.textposition.min.js
+  contents:
+    - h:lib/annotator.textposition.js
+annotator_textquote:
+  filters: uglifyjs
+  output: lib/annotator.textquote.min.js
+  contents:
+    - h:lib/annotator.textquote.js
+annotator_texthighlights:
+  filters: uglifyjs
+  output: lib/annotator.texthighlights.min.js
+  contents:
+    - h:lib/annotator.texthighlights.js
+
+# Annotator plugins maintained in tree
+annotator_bridge:
+  contents:
+    - h:js/plugin/bridge.js
+annotator_discovery:
+  contents:
+    - h:js/plugin/discovery.js
+annotator_heatmap:
+  contents:
+    - h:js/plugin/heatmap.js
+annotator_threading:
+  contents:
+    - h:js/plugin/threading.js
+annotator_toolbar:
+  contents:
+    - h:js/plugin/toolbar.js
+
+# Angular
+angular:
+  filters: uglifyjs
+  output: lib/angular.min.js
+  contents:
+    - h:lib/angular.js
+angular_animate:
+  filters: uglifyjs
+  output: lib/angular-animate.min.js
+  contents:
+    - h:lib/angular-animate.js
+angular_bootstrap:
+  filters: uglifyjs
+  output: lib/angular-bootstrap.min.js
+  contents:
+    - h:lib/angular-bootstrap.js
+angular_resource:
+  filters: uglifyjs
+  output: lib/angular-resource.min.js
+  contents:
+    - h:lib/angular-resource.js
+angular_route:
+  filters: uglifyjs
+  output: lib/angular-route.min.js
+  contents:
+    - h:lib/angular-route.js
+angular_sanitize:
+  filters: uglifyjs
+  output: lib/angular-sanitize.min.js
+  contents:
+    - h:lib/angular-sanitize.js
+
+# jQuery
+jquery:
+  filters: uglifyjs
+  output: lib/jquery.min.js
+  contents:
+    - h:lib/jquery-1.10.2.js
+jquery_mousewheel:
+  filters: uglifyjs
+  output: lib/jquery.mousewheel.min.js
+  contents:
+    - h:lib/jquery.mousewheel.js
+jquery_scrollintoview:
+  filters: uglifyjs
+  output: lib/jquery.scrollintoview.min.js
+  contents:
+    - h:lib/jquery.scrollintoview.js
+
+# jQuery UI
+jquery_ui:
+  contents:
+    - jquery_ui_css
+    - jquery_ui_js
+
+jquery_ui_css:
+  filters: cssrewrite, cleancss
+  output: css/jquery-ui-smoothness.min.css
+  contents:
+    - h:lib/jquery-ui-smoothness.css
+
+jquery_ui_js:
+  filters: uglifyjs
+  output: lib/jquery.ui.full.min.js
+  contents:
+    - h:lib/jquery.ui.core.js
+    - h:lib/jquery.ui.position.js
+    - h:lib/jquery.ui.widget.js
+    - h:lib/jquery.ui.tooltip.js
+    - contents:
+        - h:lib/jquery.ui.autocomplete.js
+        - h:lib/jquery.ui.menu.js
+    - contents:
+        - h:lib/jquery.ui.effect.js
+        - h:lib/jquery.ui.effect-blind.js
+        - h:lib/jquery.ui.effect-forecolor-highlight.js
+        - h:lib/jquery.ui.effect-highlight.js
+
+# Polyfills
+raf:
+  filters: uglifyjs
+  output: lib/polyfills/raf.min.js
+  contents:
+    - h:lib/polyfills/raf.js
+wgxpath:
+  filters: uglifyjs
+  output: lib/polyfills/wgxpath.install.min.js
+  contents:
+    - h:lib/polyfills/wgxpath.install.js
+
+
+# Other dependencies
+d3:
+  filters: uglifyjs
+  output: lib/d3.min.js
+  contents:
+    - h:lib/d3.js
+jschannel:
+  filters: uglifyjs
+  output: lib/jschannel.min.js
+  contents:
+    - h:lib/jschannel.js
+jwz:
+  filters: uglifyjs
+  output: lib/jwz.min.js
+  contents:
+    - h:lib/jwz.js
+momentjs:
+  contents:
+    - filters: uglifyjs
+      output: lib/moment.min.js
+      contents:
+      - h:lib/moment-with-langs.js
+    - filters: uglifyjs
+      output: lib/jstz.min.js
+      contents:
+      - h:lib/jstz.js
+    - filters: uglifyjs
+      output: lib/moment-timezone.min.js
+      contents:
+      - h:lib/moment-timezone.js
+    - filters: uglifyjs
+      output: lib/moment-timezone-data.min.js
+      contents:
+      - h:lib/moment-timezone-data.js
+pagedown:
+  filters: uglifyjs
+  output: lib/Markdown.Converter.min.js
+  contents:
+    - h:lib/Markdown.Converter.js
+sockjs:
+  filters: uglifyjs
+  output: lib/sockjs.min.js
+  contents:
+    - h:lib/sockjs-0.3.4.js
+tag_it:
+  filters: uglifyjs
+  output: lib/tag-it.min.js
+  contents:
+    - h:lib/tag-it.js
+uuid:
+  filters: uglifyjs
+  output: lib/uuid.min.js
+  contents:
+    - h:lib/uuid.js
+visualsearch:
+  contents:
+    - visualsearch_css
+    - visualsearch_js
+visualsearch_css:
+  contents:
+    - filters: cleancss
+      output: css/visualsearch.min.css
+      contents:
+        - h:css/visualsearch.css
+visualsearch_js:
+  contents:
+    - filters: uglifyjs
+      output: lib/underscore.min.js
+      contents:
+        - h:lib/underscore-1.4.3.js
+    - filters: uglifyjs
+      output: lib/backbone.min.js
+      contents:
+        - h:lib/backbone-0.9.10.js
+    - filters: uglifyjs
+      output: lib/visualsearch.min.js
+      contents:
+        - h:lib/visualsearch.js
+
+# Application
+app:
+  contents:
+    - app_css
+    - app_js
+
+app_js:
+  output: js/hypothesis-app.js
+  contents:
+    - jquery
+    - jquery_mousewheel
+    - angular
+    - angular_animate
+    - angular_bootstrap
+    - angular_resource
+    - angular_route
+    - angular_sanitize
+    - gettext
+    - annotator_i18n
+    - annotator
+    - annotator_auth
+    - annotator_bridge
+    - annotator_discovery
+    - annotator_document
+    - annotator_permissions
+    - annotator_store
+    - annotator_threading
+    - jschannel
+    - jwz
+    - momentjs
+    - pagedown
+    - raf
+    - sockjs
+    - jquery_ui_js
+    - tag_it
+    - uuid
+    - visualsearch_js
+    - filters: uglifyjs
+      contents:
+        - h:js/hypothesis.js
+
+app_css:
+    filters: cleancss
+    output: css/hypothesis.min.css
+    contents:
+      - jquery_ui_css
+      - visualsearch_css
+      - h:css/hypothesis.css
+
+# The inject bundle is intended to be loaded into pages for bootstrapping
+# the application. It sets up RPC channels for cross-domain communication
+# between frames participating in annotation by using the annotator bridge
+# plugin.
+inject:
+  contents:
+    - inject_css
+    - inject_js
+
+inject_js:
+  output: js/hypothesis-assets.js
+  contents:
+    - d3
+    - jquery
+    - jquery_scrollintoview
+    - jquery_ui_js
+    - jschannel
+    - gettext
+    - annotator_i18n
+    - annotator
+    - annotator_bridge
+    - annotator_document
+    - annotator_heatmap
+    - annotator_fuzzytextanchors
+    - annotator_textrange
+    - annotator_textposition
+    - annotator_textquote
+    - annotator_texthighlights
+    - annotator_pdf
+    - annotator_toolbar
+    - filters: uglifyjs
+      contents:
+        - h:js/hypothesis-inject.js
+
+inject_css:
+  output: css/hypothesis-inject.min.css
+  filters: cleancss
+  contents:
+    - jquery_ui_css
+    - h:css/hypothesis-inject.css
+
+sidebar:
+  filters: cleancss
+  output: css/sidebar.min.css
+  contents:
+    - h:css/sidebar.css
