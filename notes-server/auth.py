@@ -76,6 +76,6 @@ def includeme(config):
     token_endpoint = settings.get('auth.wpd.token', default_token)
     config.add_route('auth.wpd.token', token_endpoint)
 
-    config.add_route('auth.wpd.login', '/wpd/login')
-    config.add_route('auth.wpd.callback', '/wpd/callback')
+    config.add_route('auth.wpd.login', '/login')
+    config.add_route('auth.wpd.callback', '/callback')
     config.scan(__name__)
