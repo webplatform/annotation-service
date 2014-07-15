@@ -1,0 +1,138 @@
+<html metal:use-macro="main_template">
+  <body metal:fill-slot="body" tal:omit-tag>
+    <!-- Toolbar -->
+    <div class="topbar"
+         ng-class="frame.visible && 'shown'"
+         ng-mouseenter="showViewSort(true, true)">
+      <div class="inner" ng-switch="!!auth.persona">
+        <a class="pull-right" href=""
+           ng-click="login()"
+           ng-switch-when="false"
+           ng-show="sheet.collapsed">Sign in</a>
+        <div class="pull-right user-picker"
+             ng-switch-default
+             data-user-picker-model="auth.persona"
+             data-user-picker-options="auth.personas">
+        </div>
+
+        <!-- Searchbar -->
+        <div class="search-container">
+          <div ng-show="show_search"
+               class="visual-search visual-container"
+               query="query"
+               onsearch="search(this)"
+               facets="searchFacets"
+               values="searchValues"
+               onclear="searchClear()"
+               ></div>
+          <div ng-hide="show_search"
+               class="visual-container"
+               ng-click="show_search = true">
+            <div class="VS-search VS-search-collapsed">
+              <div class="VS-search-box-wrapper VS-search-box">
+                <div class="VS-icon VS-icon-search"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Account and Authentication -->
+      <div class="sheet collapsed"
+           ng-class="sheet.collapsed && 'collapsed'"
+           ng-init="sheet.collapsed = true">
+
+        <span class="close"
+              role="button"
+              title="Close"
+              ng-click="sheet.collapsed = true"></span>
+
+        <div class="form-vertical tabbable"
+             data-tab-reveal="['login', 'register', 'forgot', 'activate']"
+             ng-controller="AuthController"
+             ng-model="sheet.tab"
+             ng-submit="submit(this[sheet.tab])">
+          <metal:main use-macro="blocks['auth-tabs']" />
+          <footer ng-show="sheet.tab == 'login' || sheet.tab == 'register'">
+            <ul>
+              <li>
+                <a href="" ng-click="sheet.tab = 'forgot'">Password help?</a>
+              </li>
+              <li>
+                <a href="" ng-click="sheet.tab = 'activate'"
+                   >I have an activation code.</a>
+              </li>
+            </ul>
+          </footer>
+        </div>
+      </div>
+      <!-- / Account and Authentication -->
+
+    </div>
+    <!-- / Toolbar -->
+
+    <!-- Content -->
+    <div id="wrapper" class="content">
+      <!-- View Sort Controls -->
+      <div class="viewsort"
+           ng-mouseenter="showViewSort()"
+           ng-mouseleave="showViewSort(false)"
+           ng-show="viewState.showControls">
+        <div class="dropdown">
+          <span role="button"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                >{{viewState.view}}</span>
+          <ul class="dropdown-menu" role="menu">
+            <li ng-repeat="view in views">
+              <a href="" ng-click="applyView(view)">{{view}}</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <span role="button"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                >{{viewState.sort}}</span>
+          <ul class="dropdown-menu" role="menu">
+            <li ng-repeat="sort in sorts">
+              <a href="" ng-click="applySort(sort)">{{sort}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- / View Sort Controls -->
+
+      <!-- Angular view -->
+      <div ng-view=""></div>
+    </div>
+    <!-- / Content -->
+
+    <!-- Templates -->
+    <script type="text/ng-template" id="annotation.html">
+      <metal:main use-macro="load: annotation.html" />
+    </script>
+    <script type="text/ng-template" id="editor.html">
+      <metal:main use-macro="load: editor.html" />
+    </script>
+    <script type="text/ng-template" id="markdown.html">
+      <metal:main use-macro="load: markdown.html" />
+    </script>
+    <script type="text/ng-template" id="privacy.html">
+      <metal:main use-macro="load: privacy.html" />
+    </script>
+    <script type="text/ng-template" id="userPicker.html">
+      <metal:main use-macro="load: userPicker.html" />
+    </script>
+    <script type="text/ng-template" id="viewer.html">
+      <metal:main use-macro="load: viewer.html" />
+    </script>
+    <script type="text/ng-template" id="page_search.html">
+      <metal:main use-macro="load: page_search.html" />
+    </script>
+    <script type="text/ng-template" id="notification.html">
+      <metal:main use-macro="load: notification.html" />
+    </script>
+  </body>
+</html>
