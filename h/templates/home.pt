@@ -1,0 +1,16 @@
+<html metal:use-macro="main_template">
+  <head metal:fill-slot="head" tal:omit-tag>
+    <script type="text/javascript" defer="defer">
+      <metal:main use-macro="load: h:templates/embed.txt" />
+    </script>
+    <title>WebPlatform Notes</title>
+  </head>
+  <body metal:fill-slot="body" tal:omit-tag>
+    <div id="home" class="content paper">
+      <metal:main use-macro="load: h:templates/header.pt" />
+      <p>This is W3C &amp; WebPlatform.org’s annotation service. You
+        can read more <a href="http://docs.webplatform.org/wiki/WPD:Projects/Decentralized_commenting">about our project here</a>
+        (please put better explaination)</p>
+    </div>
+  </body>
+</html>

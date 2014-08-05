@@ -1,0 +1,7 @@
+<header>
+  <img height="72px" width="72px"
+       src="${request.static_url('h:static/images/logo.png')}" />
+  <hgroup>
+    <h1>WebPlatform&nbsp;<span class="red">Notes</span></h1>
+  </hgroup>
+</header>
