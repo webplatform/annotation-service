@@ -7,22 +7,22 @@ from requests_oauthlib import OAuth2Session
 from requests import Request
 
 
-@view_config(route_name='auth.wpd.login')
-@view_config(route_name='auth.wpd.callback', renderer='h:templates/oauth.pt')
+@view_config(route_name='webplatform.login')
+@view_config(route_name='webplatform.callback', renderer='h:templates/oauth.pt')
 def login(request):
     registry = request.registry
     settings = registry.settings
     session = request.session
 
-    key = settings['auth.wpd.client_id']
-    secret = settings['auth.wpd.client_secret']
+    key = settings['webplatform.client_id']
+    secret = settings['webplatform.client_secret']
     code = request.params.get('code')
     state = session.get('oauth_state')
     scope = ['session']
     provider = OAuth2Session(key, scope=scope, state=state)
 
-    authz_endpoint = request.route_url('auth.wpd.authorize')
-    token_endpoint = request.route_url('auth.wpd.token')
+    authz_endpoint = request.route_url('webplatform.authorize')
+    token_endpoint = request.route_url('webplatform.token')
     profile_endpoint = 'https://profile.accounts.webplatform.org/v1/session/read'
 
     if code is not None:
@@ -53,13 +53,13 @@ def includeme(config):
     settings = registry.settings
 
     default_authz = 'https://oauth.accounts.webplatform.org/v1/authorization'
-    authz_endpoint = settings.get('auth.wpd.authorize', default_authz)
-    config.add_route('auth.wpd.authorize', authz_endpoint)
+    authz_endpoint = settings.get('webplatform.authorize', default_authz)
+    config.add_route('webplatform.authorize', authz_endpoint)
 
     default_token = 'https://oauth.accounts.webplatform.org/v1/token'
-    token_endpoint = settings.get('auth.wpd.token', default_token)
-    config.add_route('auth.wpd.token', token_endpoint)
+    token_endpoint = settings.get('webplatform.token', default_token)
+    config.add_route('webplatform.token', token_endpoint)
 
-    config.add_route('auth.wpd.login', '/wpd/login')
-    config.add_route('auth.wpd.callback', '/wpd/callback')
+    config.add_route('webplatform.login', '/wpd/login')
+    config.add_route('webplatform.callback', '/wpd/callback')
     config.scan(__name__)
