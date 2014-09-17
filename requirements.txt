@@ -1,2 +1,2 @@
 -e .
-https://github.com/hypothesis/h/releases/download/v0.3.1/h-0.3.1.tar.gz#egg=h-0.3.1
+https://github.com/hypothesis/h/releases/download/v0.3.1/h-0.3.1.tar.gz#egg=h-0.3.1[YAML]
