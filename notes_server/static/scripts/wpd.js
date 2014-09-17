@@ -25,4 +25,4 @@ configure = ['$routeProvider',
 ];
 
 
-angular.module('wpd.notesServer', [], configure)
+angular.module('webplatform.notesServer', [], configure)
