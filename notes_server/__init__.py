@@ -6,6 +6,10 @@ from pyramid.view import view_config
 from requests_oauthlib import OAuth2Session
 from requests import Request
 
+AUTHZ_ENDPOINT = 'https://oauth.accounts.webplatform.org/v1/authorization'
+TOKEN_ENDPOINT = 'https://oauth.accounts.webplatform.org/v1/token'
+PROFILE_ENDPOINT = 'https://profile.accounts.webplatform.org/v1/session/read'
+
 
 @view_config(route_name='webplatform.login')
 @view_config(route_name='webplatform.callback', renderer='h:templates/oauth.pt')
@@ -52,14 +56,21 @@ def includeme(config):
     registry = config.registry
     settings = registry.settings
 
-    default_authz = 'https://oauth.accounts.webplatform.org/v1/authorization'
-    authz_endpoint = settings.get('webplatform.authorize', default_authz)
+    registry.registerUtility(consumer_factory, IConsumerClass)
+    config.include('h')
+
+    authz_endpoint = settings.get('webplatform.authorize', AUTHZ_ENDPOINT)
     config.add_route('webplatform.authorize', authz_endpoint)
 
-    default_token = 'https://oauth.accounts.webplatform.org/v1/token'
-    token_endpoint = settings.get('webplatform.token', default_token)
+    token_endpoint = settings.get('webplatform.token', TOKEN_ENDPOINT)
     config.add_route('webplatform.token', token_endpoint)
 
     config.add_route('webplatform.login', '/wpd/login')
     config.add_route('webplatform.callback', '/wpd/callback')
     config.scan(__name__)
+
+
+def main(global_config, **settings):
+    config = Configurator(settings=settings)
+    config.include(includeme)
+    return config.make_wsgi_app()
