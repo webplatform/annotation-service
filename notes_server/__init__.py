@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
 import json
-import datetime
 
 from annotator.auth import Consumer
 from pyramid.config import Configurator
 from pyramid.httpexceptions import HTTPFound
-from pyramid.session import signed_serialize, signed_deserialize
+from pyramid.security import remember
 from pyramid.view import view_config
 from requests_oauthlib import OAuth2Session
 from requests import Request
 
-from h.api import get_consumer
 from h.interfaces import IConsumerClass
+from h.auth.local.views import session
 
 
 AUTHZ_ENDPOINT = 'https://oauth.accounts.webplatform.org/v1/authorization'
@@ -31,11 +30,10 @@ def consumer_factory(key, **kwargs):
 def login(request):
     registry = request.registry
     settings = registry.settings
+    session = request.session
 
-    now = datetime.datetime.utcnow()
-    client = get_consumer(request)
     code = request.params.get('code')
-    state = request.params.get('state')
+    state = session.get('oauth_state')
 
     authz_endpoint = request.route_url('webplatform.authorize')
     token_endpoint = request.route_url('webplatform.token')
@@ -43,13 +41,12 @@ def login(request):
     wp_key = settings['webplatform.client_id']
     wp_secret = settings['webplatform.client_secret']
 
-    expected = signed_serialize(now, 'webplatform.' + client.secret)
-    provider = OAuth2Session(wp_key, scope=['session'], state=expected)
+    provider = OAuth2Session(wp_key, scope=['session'], state=state)
 
     if code is not None:
         try:
-            then = signed_deserialize(state, 'webplatform.' + client.secret)
-            assert (then - now).total_seconds() <= 300
+            assert state == session['oauth_state']
+            del session['oauth_state']
             req = Request('POST', token_endpoint,
                           data=json.dumps({
                               'client_id': wp_key,
@@ -59,12 +56,17 @@ def login(request):
             prepped = provider.prepare_request(req)
             provider.token = provider.send(prepped).json()
             provider._client.access_token = provider.token['access_token']
-            return provider.get(PROFILE_ENDPOINT).json()
-        except:
+            profile = provider.get(PROFILE_ENDPOINT)
+            provider_login = profile.json()['username']
+            userid = 'acct:{}@{}'.format(provider_login, request.domain)
+            request.response.headerlist.extend(remember(request, userid))
+            return dict(result=profile.text)
+        except Exception as e:
             pass
 
-    location, _ = provider.authorization_url(authz_endpoint)
+    location, state = provider.authorization_url(authz_endpoint)
     location = location.replace('response_type=code&', '')  # unused
+    session['oauth_state'] = state
     return HTTPFound(location=location)
 
 
@@ -83,6 +85,10 @@ def includeme(config):
 
     config.add_route('webplatform.login', '/wpd/login')
     config.add_route('webplatform.callback', '/wpd/callback')
+
+    config.add_view(session, accept='application/json', name='app',
+                    renderer='json')
+
     config.scan(__name__)
 
 
