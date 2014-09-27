@@ -89,6 +89,9 @@ def includeme(config):
     config.add_view(session, accept='application/json', name='app',
                     renderer='json')
 
+    config.override_asset('h:templates/blocks.pt',
+                          'notes_server:templates/blocks.pt')
+
     config.scan(__name__)
 
 

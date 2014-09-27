@@ -1,5 +1,13 @@
-configure = ['$routeProvider',
-  function  ( $routeProvider ) {
+configure = ['$routeProvider', 'identityProvider',
+  function  ( $routeProvider,   identityProvider ) {
+    identityProvider.checkAuthorization = ['$q', function ($q) {
+      return $q.when({userid: null});
+    }]
+
+    identityProvider.requestAuthorization = ['$q', function ($q) {
+      return $q.when({userid: null});
+    }]
+
     $routeProvider.when('/wpd/callback', {
       resolve: {
         channel: ['$window', function ($window) {
@@ -8,21 +16,22 @@ configure = ['$routeProvider',
             scope: 'annotator:auth',
             window: $window.opener,
             onReady: function () {
-              _channel.call(
+              _channel.call({
                 method: 'success',
                 params: $window.oauth_status,
                 success: function () {
                   $window.close();
                 }
               });
-            });
+            }
           });
           return _channel;
-        ]
+        }],
       },
       redirectTo: '/viewer'
     });
+  }
 ];
 
 
-angular.module('webplatform.notesServer', [], configure)
+angular.module('h.auth', ['h.identity'], configure)

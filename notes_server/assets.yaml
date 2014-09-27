@@ -1,1 +1,3 @@
 auth:
+  contents:
+    - notes_server:static/scripts/auth.js
