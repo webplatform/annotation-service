@@ -13,6 +13,9 @@ from requests import Request
 from h.interfaces import IConsumerClass
 from h.auth.local.views import session
 
+import logging
+log = logging.getLogger(__name__)
+
 
 AUTHZ_ENDPOINT = 'https://oauth.accounts.webplatform.org/v1/authorization'
 TOKEN_ENDPOINT = 'https://oauth.accounts.webplatform.org/v1/token'
@@ -62,8 +65,8 @@ def login(request):
             userid = 'acct:{}@{}'.format(provider_login, request.domain)
             request.response.headerlist.extend(remember(request, userid))
             return dict(result=profile.text)
-        except Exception as e:
-            pass
+        except Exception:
+            log.exception('error processing oauth callback')
 
     location, state = provider.authorization_url(authz_endpoint)
     location = location.replace('response_type=code&', '')  # unused
