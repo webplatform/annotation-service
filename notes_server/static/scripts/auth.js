@@ -4,7 +4,7 @@ configure = ['identityProvider',
       '$q', function ($q) {
         return $q.when({userid: null});
       }
-    ]
+    ];
 
     identityProvider.requestAuthorization = [
       '$q', '$window', function ($q, $window) {
@@ -24,7 +24,13 @@ configure = ['identityProvider',
         });
         return deferred.promise;
       }
-    ]
+    ];
+
+    identityProvider.forgetAuthorization = [
+      '$q', function ($q) {
+        return $q.when({userid: null});
+      }
+    ];
   }
 ];
 
