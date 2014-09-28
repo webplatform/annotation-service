@@ -1,12 +1,6 @@
-configure = ['$routeProvider', 'identityProvider',
-  function  ( $routeProvider,   identityProvider ) {
-    identityProvider.checkAuthorization = ['$q', function ($q) {
-      return $q.when({userid: null});
-    }]
-
-    identityProvider.requestAuthorization = ['$q', function ($q) {
-      return $q.when({userid: null});
-    }]
+configure = ['$locationProvider', '$routeProvider', 'identityProvider',
+  function  ( $locationProvider,   $routeProvider,   identityProvider ) {
+    $locationProvider.html5Mode(true);
 
     $routeProvider.when('/wpd/callback', {
       resolve: {
@@ -30,6 +24,14 @@ configure = ['$routeProvider', 'identityProvider',
       },
       redirectTo: '/viewer'
     });
+
+    identityProvider.checkAuthorization = ['$q', function ($q) {
+      return $q.when({userid: null});
+    }]
+
+    identityProvider.requestAuthorization = ['$q', function ($q) {
+      return $q.when({userid: null});
+    }]
   }
 ];
 
