@@ -10,6 +10,8 @@ Then, add settigs for ``api.key`` and ``api.secret``. The key can be anything
 and will appear as the agent string in the consumer field of saved annotations.
 The secret is used to sign API tokens.
 
+Design document: http://docs.webplatform.org/wiki/WPD:Projects/SSO/Hypothesis
+
 ```shell
 $ ./bootstrap
 $ ./run
