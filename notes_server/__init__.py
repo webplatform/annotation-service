@@ -4,6 +4,7 @@ import json
 from annotator.auth import Consumer
 from pyramid.config import Configurator
 from pyramid.httpexceptions import HTTPFound
+from pyramid.path import AssetResolver
 from pyramid.security import remember
 from pyramid.view import view_config
 from requests_oauthlib import OAuth2Session
@@ -88,6 +89,12 @@ def includeme(config):
 
     config.add_view(session, accept='application/json', name='app',
                     renderer='json')
+
+    # XXX: https://github.com/sontek/pyramid_webassets/issues/53
+    h_asset_path = AssetResolver().resolve('h:static').abspath()
+    h_asset_url = 'assets/h'
+    config.add_static_view(h_asset_url, 'h:static')
+    config.add_webassets_path(h_asset_path, h_asset_url)
 
     config.override_asset('h:templates/blocks.pt',
                           'notes_server:templates/blocks.pt')
