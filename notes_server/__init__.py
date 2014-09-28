@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
 import json
 
-from annotator.auth import Consumer
+from annotator.auth import DEFAULT_TTL, Consumer
 from pyramid.config import Configurator
 from pyramid.httpexceptions import HTTPFound
 from pyramid.path import AssetResolver
 from pyramid.security import remember
 from pyramid.view import view_config
+from pyramid_layout.layout import layout_config
 from requests_oauthlib import OAuth2Session
 from requests import Request
 
+from h.auth.local.views import model
+from h.layouts import BaseLayout
 from h.interfaces import IConsumerClass
-from h.auth.local.views import session
 
 import logging
 log = logging.getLogger(__name__)
@@ -22,25 +24,43 @@ TOKEN_ENDPOINT = 'https://oauth.accounts.webplatform.org/v1/token'
 PROFILE_ENDPOINT = 'https://profile.accounts.webplatform.org/v1/session/read'
 
 
-def consumer_factory(key, **kwargs):
-    inst = Consumer(key)
-    inst.__dict__.update(kwargs)
-    return inst
+class OAuthConsumer(Consumer):
+    def __init__(self, key, **kwargs):
+        super(OAuthConsumer, self).__init__(key)
+        kwargs.setdefault('ttl', DEFAULT_TTL)
+        self.__dict__.update(kwargs)
+
+    @property
+    def client_id(self):
+        return unicode(self.key)
+
+    @property
+    def client_secret(self):
+        return unicode(self.secret)
 
 
-@view_config(route_name='webplatform.login')
-@view_config(route_name='webplatform.callback',
-             renderer='notes_server:templates/oauth.pt')
+@layout_config(name='auth', template='h:templates/base.pt')
+class AuthLayout(BaseLayout):
+    app = None
+    requirements = (('jschannel', None), ('wpd-callback', None))
+
+
+@view_config(layout='auth',
+             renderer='notes_server:templates/auth.pt',
+             route_name='login')
+@view_config(layout='auth',
+             renderer='notes_server:templates/auth.pt',
+             route_name='callback')
 def login(request):
     registry = request.registry
     settings = registry.settings
     session = request.session
 
     code = request.params.get('code')
-    state = session.get('oauth_state')
+    state = request.params.get('state')
 
-    authz_endpoint = request.route_url('webplatform.authorize')
-    token_endpoint = request.route_url('webplatform.token')
+    authz_endpoint = request.route_url('authorize')
+    token_endpoint = request.route_url('token')
 
     wp_key = settings['webplatform.client_id']
     wp_secret = settings['webplatform.client_secret']
@@ -64,7 +84,7 @@ def login(request):
             provider_login = profile.json()['username']
             userid = 'acct:{}@{}'.format(provider_login, request.domain)
             request.response.headerlist.extend(remember(request, userid))
-            return dict(result=profile.text)
+            return dict(session=json.dumps(model(request)))
         except Exception:
             log.exception('error processing oauth callback')
 
@@ -78,20 +98,17 @@ def includeme(config):
     registry = config.registry
     settings = registry.settings
 
-    registry.registerUtility(consumer_factory, IConsumerClass)
+    registry.registerUtility(OAuthConsumer, IConsumerClass)
     config.include('h')
 
     authz_endpoint = settings.get('webplatform.authorize', AUTHZ_ENDPOINT)
-    config.add_route('webplatform.authorize', authz_endpoint)
+    config.add_route('authorize', authz_endpoint)
 
     token_endpoint = settings.get('webplatform.token', TOKEN_ENDPOINT)
-    config.add_route('webplatform.token', token_endpoint)
+    config.add_route('token', token_endpoint)
 
-    config.add_route('webplatform.login', '/wpd/login')
-    config.add_route('webplatform.callback', '/wpd/callback')
-
-    config.add_view(session, accept='application/json', name='app',
-                    renderer='json')
+    config.add_route('login', '/wpd/login')
+    config.add_route('callback', '/wpd/callback')
 
     # XXX: https://github.com/sontek/pyramid_webassets/issues/53
     h_asset_path = AssetResolver().resolve('h:static').abspath()

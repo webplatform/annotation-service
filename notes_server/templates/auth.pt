@@ -1,0 +1,10 @@
+<html metal:use-macro="main_template">
+  <head metal:fill-slot="head" tal:omit-tag>
+    <script type="text/javascript">
+      window.session = ${structure: session};
+    </script>
+  </head>
+  <body metal:fill-slot="body" tal:omit-tag>
+    <p>Processing login...</p>
+  </body>
+</html>

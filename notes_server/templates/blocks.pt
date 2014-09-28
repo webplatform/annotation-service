@@ -3,6 +3,6 @@
     Please edit your profile on webplatform.org.
   </div>
   <div ng-if="!persona">
-    Log in on webplatform.org.
+    <metal:main use-macro="load: notes_server:templates/auth.html"/>
   </div>
 </metal:main>
