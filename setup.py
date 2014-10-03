@@ -6,12 +6,10 @@ setup(
     description='Webplatform Notes Server',
     version=0.1,
     packages=find_packages(),
-
-    install_requires=[
-        'requests_oauthlib>=0.4.0',
-    ],
-
+    install_requires=['requests_oauthlib>=0.4.0'],
     include_package_data=True,
     zip_safe=False,
+    entry_points={
+        'paste.app_factory': ['main=notes_server:main'],
+    },
 )
-

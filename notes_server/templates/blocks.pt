@@ -1,0 +1,8 @@
+<metal:main define-macro="dialog">
+  <div ng-if="persona">
+    Please edit your profile on webplatform.org.
+  </div>
+  <div ng-if="!persona">
+    <metal:main use-macro="load: notes_server:templates/auth.html"/>
+  </div>
+</metal:main>
