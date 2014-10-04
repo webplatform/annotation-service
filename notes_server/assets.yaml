@@ -1,11 +1,8 @@
 auth:
   contents:
     - notes_server:static/scripts/auth.js
+    - https://www.webplatform.org/assets/js/sso.js
 
-wpd-callback:
+webplatform-callback:
   contents:
     - notes_server:static/scripts/callback.js
-
-wpd-sso:
-  contents:
-    - https://www.webplatform.org/assets/js/sso.js

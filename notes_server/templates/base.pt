@@ -1,0 +1,13 @@
+<tal:block metal:define-macro="main_template"
+           metal:extend-macro="load: h:templates/base.pt"
+           omit-tag>
+  <tal:block metal:fill-slot="head" omit-tag>
+    <tal:block metal:define-slot="head"></tal:block>
+    <script type="text/javascript">
+      window.ssoOptions = {
+        logging: ${str(request.webassets_env.debug).lower()},
+        callbackUri: "${request.route_url('recover')}"
+      };
+    </script>
+  </tal:block>
+</tal:block>

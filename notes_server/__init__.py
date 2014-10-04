@@ -12,7 +12,7 @@ from requests_oauthlib import OAuth2Session
 from requests import Request
 
 from h.auth.local.views import model
-from h.layouts import BaseLayout
+from h.layouts import BaseLayout, AppLayout as BaseAppLayout
 from h.interfaces import IConsumerClass
 
 import logging
@@ -21,7 +21,7 @@ log = logging.getLogger(__name__)
 
 AUTHZ_ENDPOINT = 'https://oauth.accounts.webplatform.org/v1/authorization'
 TOKEN_ENDPOINT = 'https://oauth.accounts.webplatform.org/v1/token'
-PROFILE_ENDPOINT = 'https://profile.accounts.webplatform.org/v1/session/read'
+SESSION_ENDPOINT = 'https://profile.accounts.webplatform.org/v1/session/'
 
 
 class OAuthConsumer(Consumer):
@@ -39,10 +39,15 @@ class OAuthConsumer(Consumer):
         return unicode(self.secret)
 
 
+@layout_config(name='app', template='notes_server:templates/base.pt')
+class AppLayout(BaseAppLayout):
+    pass
+
+
 @layout_config(name='auth', template='h:templates/base.pt')
 class AuthLayout(BaseLayout):
     app = None
-    requirements = (('jschannel', None), ('wpd-callback', None))
+    requirements = (('jschannel', None), ('webplatform-callback', None))
 
 
 @view_config(layout='auth',
@@ -80,7 +85,7 @@ def login(request):
             prepped = provider.prepare_request(req)
             provider.token = provider.send(prepped).json()
             provider._client.access_token = provider.token['access_token']
-            profile = provider.get(PROFILE_ENDPOINT)
+            profile = provider.get(SESSION_ENDPOINT + 'read')
             provider_login = profile.json()['username']
             userid = 'acct:{}@{}'.format(provider_login, request.domain)
             request.response.headerlist.extend(remember(request, userid))
@@ -92,6 +97,15 @@ def login(request):
     location = location.replace('response_type=code&', '')  # unused
     session['oauth_state'] = state
     return HTTPFound(location=location)
+
+
+@view_config(renderer='json', route_name='recover')
+def recover_session(request):
+    #payload = request.params.get('recoveryPayload')
+    #req = Request('POST', SESSION_ENDPOINT + 'recover',
+    #              headers={'Authorization': payload})
+    #r = req.send()
+    return {}
 
 
 def includeme(config):
@@ -109,6 +123,7 @@ def includeme(config):
 
     config.add_route('login', '/wpd/login')
     config.add_route('callback', '/wpd/callback')
+    config.add_route('recover', '/wpd/recover')
 
     # XXX: https://github.com/sontek/pyramid_webassets/issues/53
     h_asset_path = AssetResolver().resolve('h:static').abspath()
