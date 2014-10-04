@@ -1,12 +1,12 @@
 configure = ['identityProvider',
   function  ( identityProvider ) {
-    identityProvider.checkAuthorization = [
+    identityProvider.checkAuthentication = [
       '$q', function ($q) {
-        return $q.when({userid: null});
+        return $q.reject('session restore not implemented')
       }
     ];
 
-    identityProvider.requestAuthorization = [
+    identityProvider.requestAuthentication = [
       '$q', '$window', function ($q, $window) {
         var deferred = $q.defer();
         var left = Math.round(($window.screen.width - 720) / 4);
@@ -19,14 +19,18 @@ configure = ['identityProvider',
           scope: 'notes:auth',
           window: popup
         }).bind('success', function (ctx, data) {
-          deferred.resolve(data);
+          if (data.userid && data.csrf) {
+            deferred.resolve(data.csrf);
+          } else {
+            deferred.reject('canceled')
+          }
           popup.close();
         });
         return deferred.promise;
       }
     ];
 
-    identityProvider.forgetAuthorization = [
+    identityProvider.forgetAuthentication = [
       '$q', function ($q) {
         return $q.when({userid: null});
       }
