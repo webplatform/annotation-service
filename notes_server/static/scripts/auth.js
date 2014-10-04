@@ -1,8 +1,34 @@
-configure = ['identityProvider',
-  function  ( identityProvider ) {
+configure = ['identityProvider', 'sessionProvider',
+  function  ( identityProvider,   sessionProvider ) {
     identityProvider.checkAuthentication = [
-      '$q', function ($q) {
-        return $q.reject('session restore not implemented')
+      '$q', '$window', 'session', function ($q, $window, session) {
+        var authCheck = $q.defer();
+
+        $window.ssoOptions.onlogin = function () {
+          session.load().$promise.then(
+            function (data) {
+              if (data.userid && data.csrf) {
+                authCheck.resolve(data.csrf);
+              } else {
+                authCheck.reject('no session');
+              }
+            },
+            function () {
+              authCheck.reject('request failure');
+            }
+          );
+        };
+
+        $window.ssoOptions.onlogout = function () {
+          session.logout().$promise.then(function () {
+            authCheck.reject('no session');
+          });
+        };
+
+        $window.sso.init($window.ssoOptions);
+        $window.sso.check();
+
+        return authCheck.promise;
       }
     ];
 
@@ -13,7 +39,7 @@ configure = ['identityProvider',
         var top = Math.round(($window.screen.height - 360) / 3);
         var dims = 'left=' + left + ',top=' + top;
         var props = 'dependent,dialog,width=320,height=460,' + dims;
-        var popup = $window.open('/wpd/login', 'NotesAuth', props);
+        var popup = $window.open('/login', 'NotesAuth', props);
         var channel = Channel.build({
           origin: $window.location.origin,
           scope: 'notes:auth',
@@ -31,12 +57,26 @@ configure = ['identityProvider',
     ];
 
     identityProvider.forgetAuthentication = [
-      '$q', function ($q) {
-        return $q.when({userid: null});
+      '$window', 'session', function ($window, session) {
+        $window.sso.signOut();
+        return session.logout({}).$promise
       }
     ];
+
+    sessionProvider.actions.load = {
+      method: 'GET',
+      withCredentials: true
+    };
+
+    sessionProvider.actions.logout = {
+      method: 'POST',
+      withCredentials: true,
+      params: {
+        __formid__: 'logout'
+      }
+    };
   }
 ];
 
 
-angular.module('h.auth', ['h.identity'], configure)
+angular.module('h.auth', ['h.identity', 'h.session'], configure)

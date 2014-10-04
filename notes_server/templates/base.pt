@@ -6,7 +6,7 @@
     <script type="text/javascript">
       window.ssoOptions = {
         logging: ${str(request.webassets_env.debug).lower()},
-        callbackUri: "${request.route_url('recover')}"
+        callbackUri: "${request.route_url('recover')}",
       };
     </script>
   </tal:block>

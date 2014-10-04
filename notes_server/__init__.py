@@ -3,15 +3,15 @@ import json
 
 from annotator.auth import DEFAULT_TTL, Consumer
 from pyramid.config import Configurator
-from pyramid.httpexceptions import HTTPFound
+from pyramid.httpexceptions import HTTPCreated, HTTPFound, HTTPUnauthorized
 from pyramid.path import AssetResolver
-from pyramid.security import remember
+from pyramid.security import forget, remember
 from pyramid.view import view_config
 from pyramid_layout.layout import layout_config
 from requests_oauthlib import OAuth2Session
-from requests import Request
+import requests
 
-from h.auth.local.views import model
+from h.auth.local.views import model, session as session_response
 from h.layouts import BaseLayout, AppLayout as BaseAppLayout
 from h.interfaces import IConsumerClass
 
@@ -76,19 +76,23 @@ def login(request):
         try:
             assert state == session['oauth_state']
             del session['oauth_state']
-            req = Request('POST', token_endpoint,
-                          data=json.dumps({
-                              'client_id': wp_key,
-                              'client_secret': wp_secret,
-                              'code': code,
-                          }))
+            req = requests.Request(
+                'POST',
+                token_endpoint,
+                data=json.dumps({
+                    'client_id': wp_key,
+                    'client_secret': wp_secret,
+                    'code': code,
+                }),
+            )
             prepped = provider.prepare_request(req)
             provider.token = provider.send(prepped).json()
             provider._client.access_token = provider.token['access_token']
-            profile = provider.get(SESSION_ENDPOINT + 'read')
-            provider_login = profile.json()['username']
+            profile = provider.get(SESSION_ENDPOINT + 'read').json()
+            provider_login = profile['username']
             userid = 'acct:{}@{}'.format(provider_login, request.domain)
             request.response.headerlist.extend(remember(request, userid))
+            print request.authenticated_userid
             return dict(session=json.dumps(model(request)))
         except Exception:
             log.exception('error processing oauth callback')
@@ -99,13 +103,25 @@ def login(request):
     return HTTPFound(location=location)
 
 
-@view_config(renderer='json', route_name='recover')
-def recover_session(request):
-    #payload = request.params.get('recoveryPayload')
-    #req = Request('POST', SESSION_ENDPOINT + 'recover',
-    #              headers={'Authorization': payload})
-    #r = req.send()
-    return {}
+@view_config(name='app', renderer='json', request_param='__formid__=logout')
+def logout(request):
+    request.response.headerlist.extend(forget(request))
+    return session_response(request)
+
+
+@view_config(route_name='recover')
+def session_recover(request):
+    payload = request.params.get('recoveryPayload')
+    profile = requests.get(
+        SESSION_ENDPOINT + 'recover',
+        headers={'Authorization': 'Session {}'.format(payload)}
+    ).json()
+    provider_login = profile.get('username')
+    if provider_login is None:
+        raise HTTPUnauthorized(forget(request))
+    else:
+        userid = 'acct:{}@{}'.format(provider_login, request.domain)
+        return HTTPCreated(headers=remember(request, userid))
 
 
 def includeme(config):
@@ -121,9 +137,11 @@ def includeme(config):
     token_endpoint = settings.get('webplatform.token', TOKEN_ENDPOINT)
     config.add_route('token', token_endpoint)
 
-    config.add_route('login', '/wpd/login')
+    config.add_route('login', '/login')
     config.add_route('callback', '/wpd/callback')
-    config.add_route('recover', '/wpd/recover')
+    config.add_route('recover', '/recover')
+
+    config.add_view(session_response, name='app', renderer='json')
 
     # XXX: https://github.com/sontek/pyramid_webassets/issues/53
     h_asset_path = AssetResolver().resolve('h:static').abspath()

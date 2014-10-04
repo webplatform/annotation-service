@@ -1,7 +1,8 @@
 auth:
   contents:
     - notes_server:static/scripts/auth.js
-    - https://www.webplatform.org/assets/js/sso.js
+    - notes_server:static/scripts/sso.js
+    - h:static/scripts/vendor/angular-resource.js
 
 webplatform-callback:
   contents:
