@@ -132,6 +132,10 @@
   function messageHandler(input) {
     var received, self = this;
 
+    if (self.tunnel.contentWindow !== input.source) {
+      return;
+    }
+
     if ( !! input.data) {
       received = input.data;
       self.state.recoveryPayload += received.recoveryPayload || '';
