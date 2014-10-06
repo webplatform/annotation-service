@@ -138,7 +138,7 @@ def includeme(config):
     config.add_route('token', token_endpoint)
 
     config.add_route('login', '/login')
-    config.add_route('callback', '/wpd/callback')
+    config.add_route('callback', '/callback')
     config.add_route('recover', '/recover')
 
     config.add_view(session_response, name='app', renderer='json')
