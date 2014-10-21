@@ -1,6 +1,6 @@
 (function loader(d, t) {
   if ( typeof document.querySelectorAll !== 'undefined' ) {
-    var selector = document.querySelectorAll('link[type="application/annotator+html"]');
+    var selector = document.querySelectorAll('link[type="application/annotator+html"]')[0];
 
     if ( /Trident\//.test(navigator.userAgent) === false ) {
       window.hypothesisConfig = function () {
