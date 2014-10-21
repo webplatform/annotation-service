@@ -1,11 +1,12 @@
 (function loader(d, t) {
   if ( typeof document.querySelectorAll !== 'undefined' ) {
-    var selector = document.querySelectorAll('link[type="application/annotator+html"]')[0];
+    var s = document.querySelectorAll('link[type="application/annotator+html"]');
 
-    if ( /Trident\//.test(navigator.userAgent) === false ) {
+    if ( /Trident\//.test(navigator.userAgent) === false && !!s.length ) {
+      var appAttr = s[0].href;
       window.hypothesisConfig = function () {
         return {
-          app: selector.attr('href'),
+          app: appAttr,
           Heatmap: {container: '.annotator-frame'},
           Toolbar: {container: '.annotator-frame'},
           DomTextMapper: {skip: true}
