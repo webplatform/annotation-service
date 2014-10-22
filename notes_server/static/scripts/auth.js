@@ -43,7 +43,7 @@ configure = ['identityProvider', 'sessionProvider',
         var props = 'dependent,dialog,width=320,height=460,' + dims;
         var popup = $window.open('/login', 'NotesAuth', props);
         var channel = Channel.build({
-          origin: $window.location.host,
+          origin: $window.location.protocol + '//' + $window.location.host,
           scope: 'notes:auth',
           window: popup
         }).bind('success', function (ctx, data) {
