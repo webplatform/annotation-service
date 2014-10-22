@@ -5,6 +5,12 @@ auth:
       - notes_server:static/scripts/auth.js
       - notes_server:static/scripts/sso.js
 
+inject:
+  contents:
+    - notes_server:static/scripts/ie.js
+    - inject_css
+    - inject_js
+
 webplatform-callback:
   contents:
     - notes_server:static/scripts/callback.js
