@@ -89,7 +89,3 @@ def notification(event):
                       subject=subject, body=body)
 
     get_mailer(request).send(message)
-
-
-def includeme(config):
-    config.scan(__name__)
