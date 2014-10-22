@@ -1,2 +1,2 @@
 -e .
-git+https://github.com/webplatform/h.git@20141022#egg=h-dev[YAML]
+git+https://github.com/hypothesis/h.git@4500f8b6f56e9340914360c1a582fc732f14d678#egg=h-dev[YAML]

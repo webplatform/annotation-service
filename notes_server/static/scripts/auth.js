@@ -1,8 +1,10 @@
 configure = ['identityProvider', 'sessionProvider',
   function  ( identityProvider,   sessionProvider ) {
+    var authCheck = null;
+
     identityProvider.checkAuthentication = [
       '$q', '$window', 'session', function ($q, $window, session) {
-        var authCheck = $q.defer();
+        authCheck = $q.defer();
 
         $window.ssoOptions.onlogin = function () {
           session.load().$promise.then(
@@ -34,7 +36,7 @@ configure = ['identityProvider', 'sessionProvider',
 
     identityProvider.requestAuthentication = [
       '$q', '$window', function ($q, $window) {
-        var deferred = $q.defer();
+        var authRequest = $q.defer();
         var left = Math.round(($window.screen.width - 720) / 4);
         var top = Math.round(($window.screen.height - 360) / 3);
         var dims = 'left=' + left + ',top=' + top;
@@ -46,13 +48,13 @@ configure = ['identityProvider', 'sessionProvider',
           window: popup
         }).bind('success', function (ctx, data) {
           if (data.userid && data.csrf) {
-            deferred.resolve(data.csrf);
+            authRequest.resolve(data.csrf);
           } else {
-            deferred.reject('canceled')
+            authRequest.reject('canceled')
           }
           popup.close();
         });
-        return deferred.promise;
+        return authCheck.promise.catch(authRequest.promise);
       }
     ];
 

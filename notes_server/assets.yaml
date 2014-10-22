@@ -1,8 +1,9 @@
 auth:
   contents:
-    - notes_server:static/scripts/auth.js
-    - notes_server:static/scripts/sso.js
-    - h:static/scripts/vendor/angular-resource.js
+    - session
+    - contents:
+      - notes_server:static/scripts/auth.js
+      - notes_server:static/scripts/sso.js
 
 webplatform-callback:
   contents:
