@@ -1,6 +1,6 @@
 <metal:main define-macro="dialog">
   <div ng-if="persona">
-    Please edit your profile on webplatform.org.
+    Account details are handled through <a href="https://accounts.webplatform.org/">accounts.webplatform.org</a>.
   </div>
   <div ng-if="!persona">
     <metal:main use-macro="load: notes_server:templates/auth.html"/>
