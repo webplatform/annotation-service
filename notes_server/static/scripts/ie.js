@@ -1,4 +1,4 @@
-(function loader(d, t) {
+(function () {
   if ( typeof document.querySelectorAll !== 'undefined' ) {
     var s = document.querySelectorAll('link[type="application/annotator+html"]');
 
@@ -13,10 +13,5 @@
         };
       };
     }
-
-    var g = d.createElement(t),
-        s = d.getElementsByTagName(t)[0];
-        g.src = 'https://notes.webplatform.org/embed.js';
-        s.parentNode.insertBefore(g, s);
   }
-}(document, 'script'));
+})();
