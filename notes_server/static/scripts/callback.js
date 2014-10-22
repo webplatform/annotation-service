@@ -1,5 +1,5 @@
 var channel = Channel.build({
-  origin: window.location.origin,
+  origin: window.location.host,
   scope: 'notes:auth',
   window: window.opener,
   onReady: function () {
