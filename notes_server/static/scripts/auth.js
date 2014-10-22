@@ -54,7 +54,9 @@ configure = ['identityProvider', 'sessionProvider',
           }
           popup.close();
         });
-        return authCheck.promise.catch(authRequest.promise);
+        return authCheck.promise.catch(function () {
+          return authRequest.promise;
+        });
       }
     ];
 
