@@ -157,12 +157,6 @@
   }
 
   SsoHandlerClass.prototype.init = function ssoHandlerInit(configObject) {
-
-    if (window.ssoOptions.logging === false) {
-      console = console || {}; // jshint ignore:line
-      console.debug = function () {}; // jshint ignore:line
-    }
-
     var defaultConfigs = {
       serviceEndpoint: channelOrigin,
       callbackUri: '/test/Special:AccountsHandler/callback',
