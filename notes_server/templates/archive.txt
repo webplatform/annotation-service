@@ -1,3 +1,5 @@
+https://notes.webplatform.org/from/${username}
+
 ${quote}
 
 ${annotation['text']}

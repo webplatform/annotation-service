@@ -18,7 +18,8 @@ log = logging.getLogger(__name__)  # pylint: disable=invalid-name
 
 def entry(request, annotation):
     quote = '> ' + ('\n\n> '.join(quotes(annotation)))
-    env = {'annotation': annotation, 'quote': quote}
+    username = annotation.get('user').split('@')[0].split(':', 1)[1]
+    env = {'annotation': annotation, 'quote': quote, 'username': username}
     template = 'notes_server:templates/archive.txt'
     return render(template, env, request=request)
 
@@ -83,7 +84,8 @@ def notification(event):
     title = annotation.get('document', {}).get('title', '')
     subject = "[note] {}".format(title).strip()
     body = entry(request, annotation).decode('utf-8')
-    sender = annotation.get('user').split(':', 1)[1]
+    # TODO: use config mail.default_sender value here
+    sender = "notifier-notes@webplatform.org"
 
     message = Message(sender=sender, recipients=recipients,
                       subject=subject, body=body)
