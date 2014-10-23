@@ -1,3 +1,10 @@
-${quote}
+${user}[1] just left a note on "${title}"[2].
+
+${'> ' + ('\n\n> '.join(quotes(annotation)))}
 
 ${annotation['text']}
+
+View this annotation: ${request.resource_url(request.root, 'a', annotation.id)}
+
+[1] ${request.resource_url(request.root, 'u', user)}
+[2] ${annotation['uri']}

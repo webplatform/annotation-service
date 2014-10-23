@@ -15,12 +15,7 @@ from h import events
 
 log = logging.getLogger(__name__)  # pylint: disable=invalid-name
 
-
-def entry(request, annotation):
-    quote = '> ' + ('\n\n> '.join(quotes(annotation)))
-    env = {'annotation': annotation, 'quote': quote}
-    template = 'notes_server:templates/archive.txt'
-    return render(template, env, request=request)
+ARCHIVE_TEMPLATE = 'notes_server:templates/archive.txt'
 
 
 def quotes(annotation):
@@ -81,11 +76,16 @@ def notification(event):
         return
 
     title = annotation.get('document', {}).get('title', '')
-    subject = "[note] {}".format(title).strip()
-    body = entry(request, annotation).decode('utf-8')
-    sender = annotation.get('user').split(':', 1)[1]
 
-    message = Message(sender=sender, recipients=recipients,
-                      subject=subject, body=body)
+    try:
+        user = re.match(r'acct:([^@]+)', annotation['user']).group(1)
+    except (AttributeError, KeyError):
+        log.info('Archiver could not parse user "%s"', annotation.get('user'))
+
+    env = dict(annotation=annotation, quotes=quotes, title=title, user=user)
+
+    subject = "[note] {}".format(title).strip()
+    body = render(ARCHIVE_TEMPLATE, env, request=request).decode('utf-8')
+    message = Message(recipients=recipients, subject=subject, body=body)
 
     get_mailer(request).send(message)
