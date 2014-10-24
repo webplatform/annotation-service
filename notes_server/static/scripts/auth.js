@@ -6,7 +6,7 @@ configure = ['identityProvider', 'sessionProvider',
       '$q', '$window', 'session', function ($q, $window, session) {
         authCheck = $q.defer();
 
-        $window.ssoOptions.onlogin = function () {
+        //$window.ssoOptions.onlogin = function () {
           session.load().$promise.then(
             function (data) {
               if (data.userid && data.csrf) {
@@ -19,16 +19,16 @@ configure = ['identityProvider', 'sessionProvider',
               authCheck.reject('request failure');
             }
           );
-        };
+        //};
 
-        $window.ssoOptions.onlogout = function () {
+        /*$window.ssoOptions.onlogout = function () {
           session.logout().$promise.then(function () {
             authCheck.reject('no session');
           });
         };
 
         $window.sso.init($window.ssoOptions);
-        $window.sso.check();
+        $window.sso.check();*/
 
         return authCheck.promise;
       }
@@ -62,7 +62,7 @@ configure = ['identityProvider', 'sessionProvider',
 
     identityProvider.forgetAuthentication = [
       '$window', 'session', function ($window, session) {
-        $window.sso.signOut();
+        //$window.sso.signOut();
         return session.logout({}).$promise
       }
     ];
