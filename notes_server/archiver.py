@@ -41,7 +41,7 @@ def reply_to(uri):
 
 def valid_recipients(unvalidated, uri):
     url_struct = urlparse(uri)
-    domain = re.sub(r'^(www.)?', '', url_struct.hostname)
+    domain = re.sub(r'^(www\.)?', '', url_struct.hostname)
     domain_re = '@{}$'.format(re.escape(domain))
     return [
         email
