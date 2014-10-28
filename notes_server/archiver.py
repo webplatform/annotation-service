@@ -41,6 +41,8 @@ def reply_to(uri):
 
 def valid_recipients(unvalidated, uri):
     url_struct = urlparse(uri)
+    if re.search(r'(\.|^)(w3|webplatform)\.org$', uri):
+        return unvalidated
     domain = re.sub(r'^(www\.)?', '', url_struct.hostname)
     domain_re = '@{}$'.format(re.escape(domain))
     return [
