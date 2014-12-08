@@ -21,7 +21,7 @@ log = logging.getLogger(__name__)
 
 AUTHZ_ENDPOINT = 'https://oauth.accounts.webplatform.org/v1/authorization'
 TOKEN_ENDPOINT = 'https://oauth.accounts.webplatform.org/v1/token'
-SESSION_ENDPOINT = 'https://profile.accounts.webplatform.org/v1/session/'
+SESSION_ENDPOINT = 'https://profile.accounts.webplatform.org/v1/session'
 
 
 class OAuthConsumer(Consumer):
@@ -88,7 +88,8 @@ def login(request):
             prepped = provider.prepare_request(req)
             provider.token = provider.send(prepped).json()
             provider._client.access_token = provider.token['access_token']
-            profile = provider.get(SESSION_ENDPOINT + 'read').json()
+            session_endpoint = settings.get('webplatform.session_read', SESSION_ENDPOINT + '/read' )
+            profile = provider.get(session_endpoint).json()
             provider_login = profile['username']
             userid = 'acct:{}@{}'.format(provider_login, request.domain)
             request.response.headerlist.extend(remember(request, userid))
@@ -112,8 +113,9 @@ def logout(request):
 @view_config(route_name='recover')
 def session_recover(request):
     payload = request.params.get('recoveryPayload')
+    session_endpoint = settings.get('webplatform.session_recover', SESSION_ENDPOINT + '/recover' )
     profile = requests.get(
-        SESSION_ENDPOINT + 'recover',
+        session_endpoint,
         headers={'Authorization': 'Session {}'.format(payload)}
     ).json()
     provider_login = profile.get('username')
