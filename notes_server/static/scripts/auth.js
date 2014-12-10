@@ -1,6 +1,15 @@
 configure = ['identityProvider', 'sessionProvider',
   function  ( identityProvider,   sessionProvider ) {
-    var authCheck = null;
+    var authCheck = null,
+        helpLink = document.createElement('a');
+
+    helpLink.href='/';
+    helpLink.target='_blank';
+    helpLink.className='pull-right';
+    helpLink.appendChild(document.createTextNode('Help'));
+    try {
+      document.querySelectorAll('.topbar>.inner')[0].insertBefore(helpLink,document.querySelectorAll('.topbar>.inner>a[ng-click]')[0]);
+    } catch( error ){ /* fail silently */ }
 
     identityProvider.checkAuthentication = [
       '$q', '$window', 'session', function ($q, $window, session) {
@@ -36,15 +45,6 @@ configure = ['identityProvider', 'sessionProvider',
 
     identityProvider.requestAuthentication = [
       '$q', '$window', function ($q, $window) {
-
-        var helpLink = document.createElement('a');
-        helpLink.href='/';
-        helpLink.target='_blank';
-        helpLink.className='pull-right';
-        helpLink.appendChild(document.createTextNode('Help'));
-        try {
-          document.querySelectorAll('.topbar>.inner')[0].insertBefore(helpLink,document.querySelectorAll('.topbar>.inner>a[ng-click]')[0]);
-        } catch(e){ console.error('Could not insert help link', e); }
 
         var authRequest = $q.defer();
         var left = Math.round(($window.screen.width - 720) / 4);
