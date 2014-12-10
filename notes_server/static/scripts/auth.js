@@ -44,7 +44,7 @@ configure = ['identityProvider', 'sessionProvider',
         helpLink.appendChild(document.createTextNode('Help'));
         try {
           document.querySelectorAll('.topbar>.inner')[0].insertBefore(helpLink,document.querySelectorAll('.topbar>.inner>a[ng-click]')[0]);
-        } catch(){/*silently fail*/}
+        } catch(e){ console.error('Could not insert help link', e); }
 
         var authRequest = $q.defer();
         var left = Math.round(($window.screen.width - 720) / 4);
