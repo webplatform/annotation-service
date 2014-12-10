@@ -1,0 +1,9 @@
+<header class="masthead">
+  <a href="https://www.webplatform.org/">
+    <img height="72px" width="72px" src="${request.static_url('notes_server:static/images/logo.png')}">
+  </a>
+  <hgroup style="padding-left:82px">
+    <h1 class="masthead-heading">WebPlatform Notes</h1>
+    <h2 class="masthead-subheading">a Specification Annotation Tool</h2>
+  </hgroup>
+</header>

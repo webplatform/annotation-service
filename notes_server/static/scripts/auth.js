@@ -36,6 +36,16 @@ configure = ['identityProvider', 'sessionProvider',
 
     identityProvider.requestAuthentication = [
       '$q', '$window', function ($q, $window) {
+
+        var helpLink = document.createElement('a');
+        helpLink.href='/';
+        helpLink.target='_blank';
+        helpLink.className='pull-right';
+        helpLink.appendChild(document.createTextNode('Help'));
+        try {
+          document.querySelectorAll('.topbar>.inner')[0].insertBefore(helpLink,document.querySelectorAll('.topbar>.inner>a[ng-click]')[0]);
+        } catch(){/*silently fail*/}
+
         var authRequest = $q.defer();
         var left = Math.round(($window.screen.width - 720) / 4);
         var top = Math.round(($window.screen.height - 360) / 3);

@@ -151,8 +151,17 @@ def includeme(config):
     config.add_static_view(h_asset_url, 'h:static')
     config.add_webassets_path(h_asset_path, h_asset_url)
 
+    config.override_asset('h:favicon.ico',
+                          'notes_server:favicon.ico')
+
     config.override_asset('h:templates/blocks.pt',
                           'notes_server:templates/blocks.pt')
+
+    config.override_asset('h:templates/header.pt',
+                          'notes_server:templates/header.pt')
+
+    config.override_asset('h:templates/home.pt',
+                          'notes_server:templates/home.pt')
 
     config.scan(__name__)
 

@@ -13,6 +13,8 @@
 /man
 /share
 /src
+/node_modules
+/localdev.*
 
 *.pyc
 *.pyo

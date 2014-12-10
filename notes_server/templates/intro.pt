@@ -1,0 +1,174 @@
+  <style> .page h4 { font-size: 1.19em; } /* temporary override */</style>
+
+  <p>The spec annotation tool is an experiment by the WebPlatform.org team and <a href="#ack">partners</a> to make it easier for the average developer or designer to provide important feedback to technical specifications, and for working groups to discuss and process that feedback.</p>
+
+  <p>You can check out the <b><a href="https://notes.webplatform.org/stream">live stream</a></b> of annotations being made on specs right now.</p>
+
+  <p>The spec annotation tool is an experiment by the WebPlatform.org team and <a href="#ack">partners</a> to make it easier for the average developer or designer to provide important feedback to technical specifications, and for working groups to discuss and process that feedback.</p>
+
+  <p>This page contains general information about using the spec annotation tool found on some W3C specs. If it does not answer your questions, please post on the <a href="mailto:public-spec-annotation-help@w3.org">public-spec-annotation-help@w3.org mailing list</a> (<a href="http://lists.w3.org/Archives/Public/public-spec-annotation-help/">archive</a>). Or, you can feel free to annotate this page so that we can improve the documentation.</p>
+
+  <p>For general information about the tool, please visit the <a href="http://www.w3.org/community/spec-annotation/">Spec Annotation Community Group</a>, where you can read more about the details and roadmap for the project, join the CG, request features, or learn how to get involved in helping improve the annotation tool.</p>
+
+  <p> The spec annotation tool is currently available on selected specs located on W3.org and Specs.WebPlatform.org. Annotations are visible in the sidebar of the specs or on the <a href="https://notes.webplatform.org/stream">Notes.WebPlatform.org</a> site, and are archived on the spec's dedicated mailing list.</p>
+
+
+
+  <h2 id="start">Getting Started</h2>
+
+  <h3 id="">Opening the sidebar:</h3>
+  <p>If you’re on a supported spec, you will see a small “comment” icon on the upper
+  right, near the scrollbar. To open the annotation sidebar, simply click on this button. To close it, click on it again or click anywhere on the page outside of the sidebar.</p>
+  <img alt="" src="${request.static_url('notes_server:static/notes-help/opensidebar.png')}">
+
+  <h3 id="create-account">Creating an account:</h3>
+  <h4 id="account-sidebar">From the sidebar:</h4>
+  <p>Click “Sign in”, and a login dialog will open. Click on the “Create an account” link to create an account. When you receive the confirmation email, click the link inside. You are now ready to annotate.</p>
+  <img alt="sign-in dialog" src="${request.static_url('notes_server:static/notes-help/sign-in.png')}">
+
+  <h4 id="account-notes">From WebPlatform.org:</h4>
+  <p>You can create an account directly on <a href="https://accounts.webplatform.org/signup">accounts.WebPlatform.org</a>.</p>
+  <p>If you already have an account on WebPlatform.org, you should be able to sign in without creating a new account.</p>
+
+  <h3 id="">Forgotten Password?</h3>
+  <p>Click “Forgot password?” on the sign-in dialog and enter the email address you signed up for your account with.<br>
+    <img alt="sign-in dialog" src="${request.static_url('notes_server:static/notes-help/sign-in.png')}">
+  </p>
+
+  <p>Enter the email address you signed up for your account with.<br>
+    <img alt="reset password dialog" src="${request.static_url('notes_server:static/notes-help/reset-password.png')}">
+  </p>
+
+  <p>An email will be sent to you. Click “Reset password”. Enter the new password for your account. Click sign in, and your password will be reset.</p>
+
+  <h2 id="making-annotations">Making annotations:</h2>
+  <h3 id="create-annotation">Creating an annotation</h3>
+  <p>To create an annotation select the text you want and click on the pen icon.</p>
+  <img alt="selection" src="${request.static_url('notes_server:static/notes-help/selection.jpg')}">
+  <p>The side bar will open and you’ll be able to add text and tags. You can use markdown to
+  attach links and pictures to your annotations. You can learn more about
+  markdown <a href="http://en.wikipedia.org/wiki/Markdown">here</a>.<br>
+  <img alt="annotating" src="${request.static_url('notes_server:static/notes-help/annotating.jpg')}"></p>
+
+  <h3 id="private-vs-public">Private vs Public Annotations</h3>
+  <p>Annotations can currently be set to be either public or private.
+  Private annotations are visible only to you. You can change this setting
+   this when you create or edit an annotation.</p>
+   <p>By default, annotations are private. If you want to share your annotations with
+     the working group, please change this setting before publishing your annotation.</p>
+  <p><img alt="visibility" src="${request.static_url('notes_server:static/notes-help/visibility.jpg')}"></p>
+
+  <h3 id="tagging">Tagging</h3>
+  <p>Tagging your annotations is very important. This helps the working group
+    prioritize and process your comment, and for people to search and filter
+    annotations based on different criteria. Please use the following tags:</p>
+
+  <ul>
+    <li id="tag-issue"><b>issue:</b> This indicates that your comment is a technical issues with the specification. These comments will typically be treated with the highest priority, and discussion is expected, either in annotation replies or in an email thread.</li>
+    <li id="tag-editorial"><b>editorial:</b> This is used for editorial comments, such as grammar mistakes, typos, and other non-normative issues with the spec.</li>
+    <li id="tag-question"><b>question:</b> This tag is used for open questions or for clarification.</li>
+    <li id="tag-tests"><b>tests:</b> This indicates that the annotation marks a testable assertion. It's useful to add tips or suggestions about how to test each assertion.</li>
+    <li id="tag-note"><b>note:</b> This is a note that may provide additional historical or contextual details for some part of the spec, usually left by the spec editors or working group members.</li>
+    <li id="tag-docs"><b>docs:</b> This tag is for indicating documentation of a technical feature. It may be used to provide a link to a documentation page, such as WebPlatform Docs, or indicate that a feature needs specific documentation to be useful to designers or developers.</li>
+  </ul>
+
+  <h3 id="editing">Editing an annotation</h3>
+  <p>To edit an annotation, simply hover over the annotation card and select the edit button.<br>
+  <img alt="edit" src="${request.static_url('notes_server:static/notes-help/edit.jpg')}"></p>
+
+  <h3 id="replying">Replying to an annotation</h3>
+  <p>To reply to an annotation, hover over the annotation card and select reply.</p>
+
+  <h3 id="deleting">Deleting annotations</h3>
+  <p>To delete an annotation, hover over the corresponding annotation card and select delete.<br>
+  <img alt="delete" src="${request.static_url('notes_server:static/notes-help/delete.jpg')}"><br>
+  Note: if your annotation has been replied to, it can still be deleted,
+  but the comments of people who replied to your annotation won’t be
+  deleted. Instead a place holder card will replace the deleted
+  annotation.</p>
+
+  <h3 id="control-bar">Accessing the control bar:</h3>
+  <p>Roll over and hover on the speech bubble in the tool button. &nbsp;A set
+   of controls will drop down. &nbsp;They are each turned off by default.<br>
+  <img src="${request.static_url('notes_server:static/notes-help/toolbarMid2014.jpg')}" alt=""></p>
+
+  <h3 id="show-annotations">Show annotations</h3>
+  <p>Clicking on the eye in controlbar menu renders all annotations and
+  highlights visible in the page. Clicking on any highlight in the text,
+  shows the annotation under the cursor at that spot.</p>
+  <p><img src="${request.static_url('notes_server:static/notes-help/showannotations.jpg')}" alt="show annotations"></p>
+
+  <h3 id="highlight">The highlight tool</h3>
+  <p><img src="${request.static_url('notes_server:static/notes-help/highlightingmodeMid2014.jpg')}" alt=""></p>
+  <p>To use the highlight tool, simply select it from the controlbar menu.
+   To highlight something simply select text to create a new highlight
+  (it’s that easy). Highlights default to private annotations, so they are
+   only visible if you share the link to them.</p>
+  <p>If you click on a highlight it will show you the corresponding card
+  in the sidebar. Likewise, hovering over an annotation card in the side
+  bar will reveal the corresponding highlight in the document.</p>
+  <p><img alt="highlight" src="${request.static_url('notes_server:static/notes-help/highlight.jpg')}"><br>
+  To turn highlighting mode off, simply select it again from the controlbar menu.</p>
+
+  <h3 id="new">New Comment</h3>
+  <p><img src="${request.static_url('notes_server:static/notes-help/newcommentMid2014.jpg')}" alt=""></p>
+  <p>This button creates a new unattached comment as opposed to a specific
+   annotation.&nbsp;Comments are useful for general discussion about the
+  topic of the article, without having to anchor it to a specific part of
+  the text.</p>
+
+  <h2 id="viewing">Viewing annotations:</h2>
+  <h3 id="marker-bar">The marker bar:</h3>
+  <p>The marker bar, running alongside the scrollbar, shows you where annotations
+    are on the page. Markers indicate clusters of one or more annotations. Click
+     on a marker to open the sidebar and view the annotations. Click on an
+     annotation to see its detail view.</p>
+  <img alt="heatmap" src="${request.static_url('notes_server:static/notes-help/heatmap.png')}">
+
+  <h3 id="navigation">Navigation:</h3>
+  <p>Click on the up marker and down marker to navigate to the previous and next annotations on the page.</p>
+  <img alt="navigation" src="${request.static_url('notes_server:static/notes-help/navigation.png')}">
+
+  <h3 id="search-filters">Search/Filters</h3>
+  <p>To use the search bar, enter some text and hit “enter”. You can search on specific
+    criteria by using prefixes like “user:username” or “tag:sometag”.</p>
+  <p><img alt="magnify" src="${request.static_url('notes_server:static/notes-help/magnify.jpg')}"></p>
+
+  <h3 id="sort">View and Sort Controls</h3>
+  <p>Hovering over the tool bar reveals two tabs, the “View” (left) and “Sort” (right) controls. </p>
+  <p><img src="${request.static_url('notes_server:static/notes-help/viewcontrol.jpg')}" alt="viewcontrol"><br>
+  The view control changes what annotations are visible in the sidebar. It has three options:</p>
+  <ul>
+    <li><b>Document:</b> Shows all of the document’s annotation cards.</li>
+    <li><b>Screen:</b> Shows only annotations for the part of the page
+     which is currently visible. Useful for find out what people are saying
+    about where you currently are in the text.</li>
+    <li><b>Comments:</b> Shows cards without selections.</li>
+  </ul>
+  <p>The sort control changes how the annotations are sorted. Currently
+  you can sort annotations by location (they fall roughly where they lie
+  in the text), newest, and oldest.<br>
+  <img src="${request.static_url('notes_server:static/notes-help/sortcontroll.jpg')}" alt="sortcontroll">
+
+  <h3 id="stream">The Notes stream</h3>
+  <p>In addition to viewing annotations in the sidebar of a spec, you can also
+    view all annotations being made on any spec on the <a href="https://notes.webplatform.org/stream">Notes.WebPlatform.org</a> site. You can
+    filter by tags, by users, by specs, or by keywords.</p>
+
+
+
+  <h2 id="feedback">Submitting Feedback</h2>
+  <p>Feel free to post questions, comments, or suggestions on the <a href="mailto:public-spec-annotation-help@w3.org">public-spec-annotation-help@w3.org mailing list</a>.</p>
+
+
+  <h2 id="ack">Acknowledgments</h2>
+  <h3 id="web-annotation-wg">Thanks to Web Annotation WG and Open Annotation CG</h3>
+  <p>The work that we're doing on web annotations is simultaneously being standardized in the <a href="http://www.w3.org/annotation/">Web Annotation Working Group</a>, and is based in part on the data model work by the <a href="http://www.w3.org/community/openannotation/">Open Annotation Community Group</a>.</p>
+  <p>If you are interested in web annotations, please consider joining the <a href="http://www.w3.org/annotation/">Web Annotation WG</a>.</p>
+
+  <h3 id="hypothesis">Thanks to Hypothes.is</h3>
+  <p>The web annotation software we're using for the client-side and server-side is <a href="https://hypothes.is/">Hypothes.is Annotator</a>. They have been very generous with their time in making spec annotation possible.</p>
+
+  <h3 id="others">All other annotation projects</h3>
+  <p>There are many other annotation projects on the web, some of which are already participating in the standardization work in the Web Annotation WG.</p>
+  <p>One of our goals is interoperability of implementations and open sharing of annotations, so we welcome other annotation systems or services to join in this spec annotation experiment. If you are interested in participating in this project, please join the <a href="http://www.w3.org/community/spec-annotation/">Spec Annotation Community Group</a>.</p>
