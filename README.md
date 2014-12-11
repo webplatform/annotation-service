@@ -16,3 +16,19 @@ Design document: http://docs.webplatform.org/wiki/WPD:Projects/SSO/Hypothesis
 $ ./bootstrap
 $ ./run
 ```
+
+## Environment variables
+
+Some configuration options are available in the following files and
+are generally denoted in the code as `os.environ`.
+
+* DATABASE_URL
+* ELASTICSEARCH_INDEX
+* ELASTICSEARCH_PORT
+* ELASTICSEARCH_PORT_9200_TCP_ADDR
+* ELASTICSEARCH_PORT_9200_TCP_PORT
+* MAIL_PORT_25_TCP_ADDR
+* MAIL_PORT_25_TCP_PORT
+* REDIS_PORT_6379_TCP_ADDR
+* REDIS_PORT_6379_TCP_PORT
+* SESSION_SECRET

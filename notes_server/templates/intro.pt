@@ -1,26 +1,26 @@
   <style> .page h4 { font-size: 1.19em; } /* temporary override */</style>
 
-  <p>The spec annotation tool is an experiment by the WebPlatform.org team and <a href="#ack">partners</a> 
-    to make it easier for the average developer or designer to provide important feedback to technical specifications, 
+  <p>The spec annotation tool is an experiment by the WebPlatform.org team and <a href="#ack">partners</a>
+    to make it easier for the average developer or designer to provide important feedback to technical specifications,
     and for working groups to discuss and process that feedback.</p>
 
-  <p>You can check out the <b><a href="https://notes.webplatform.org/stream">live stream</a></b> of annotations 
+  <p>You can check out the <b><a href="https://notes.webplatform.org/stream">live stream</a></b> of annotations
     being made on specs right now.</p>
 
   <p>This page contains general information about using the spec annotation tool found on some W3C specs. If it
-    does not answer your questions, please post on the 
-    <a href="mailto:public-spec-annotation-help@w3.org">public-spec-annotation-help@w3.org mailing list</a> 
-    (<a href="http://lists.w3.org/Archives/Public/public-spec-annotation-help/">archive</a>). 
+    does not answer your questions, please post on the
+    <a href="mailto:public-spec-annotation-help@w3.org">public-spec-annotation-help@w3.org mailing list</a>
+    (<a href="http://lists.w3.org/Archives/Public/public-spec-annotation-help/">archive</a>).
     Or, you can feel free to annotate this page so that we can improve the documentation.</p>
 
-  <p>For general information about the tool, please visit the 
-    <a href="http://www.w3.org/community/spec-annotation/">Spec Annotation Community Group</a>, where you can read more 
-    about the details and roadmap for the project, join the CG, request features, or learn how to get involved in 
+  <p>For general information about the tool, please visit the
+    <a href="http://www.w3.org/community/spec-annotation/">Spec Annotation Community Group</a>, where you can read more
+    about the details and roadmap for the project, join the CG, request features, or learn how to get involved in
     helping improve the annotation tool.</p>
 
-  <p>The spec annotation tool is currently available on selected specs located on W3.org and Specs.WebPlatform.org. 
-    Annotations are visible in the sidebar of the specs or on the 
-    <a href="https://notes.webplatform.org/stream">Notes.WebPlatform.org</a> site, and are archived on the 
+  <p>The spec annotation tool is currently available on selected specs located on W3.org and Specs.WebPlatform.org.
+    Annotations are visible in the sidebar of the specs or on the
+    <a href="https://notes.webplatform.org/stream">Notes.WebPlatform.org</a> site, and are archived on the
     spec's dedicated mailing list.</p>
 
 
@@ -29,13 +29,13 @@
 
   <h3 id="open-sidebar">Opening the sidebar:</h3>
   <p>If you’re on a supported spec, you will see a small “comment” icon on the upper
-    right, near the scrollbar. To open the annotation sidebar, simply click on this button. To close it, click on it again 
+    right, near the scrollbar. To open the annotation sidebar, simply click on this button. To close it, click on it again
     or click anywhere on the page outside of the sidebar.</p>
   <img alt="" src="${request.static_url('notes_server:static/notes-help/opensidebar.png')}">
 
   <h3 id="create-account">Creating an account:</h3>
   <h4 id="account-sidebar">From the sidebar:</h4>
-  <p>Click “Sign in”, and a login dialog will open. Click on the “Create an account” link to create an account. When you 
+  <p>Click “Sign in”, and a login dialog will open. Click on the “Create an account” link to create an account. When you
     receive the confirmation email, click the link inside. You are now ready to annotate.</p>
   <img alt="sign-in dialog" src="${request.static_url('notes_server:static/notes-help/sign-in.png')}">
 
@@ -52,7 +52,7 @@
     <img alt="reset password dialog" src="${request.static_url('notes_server:static/notes-help/reset-password.png')}">
   </p>
 
-  <p>An email will be sent to you. Click “Reset password”. Enter the new password for your account. Click sign in, 
+  <p>An email will be sent to you. Click “Reset password”. Enter the new password for your account. Click sign in,
     and your password will be reset.</p>
 
   <h2 id="making-annotations">Making annotations:</h2>
@@ -68,7 +68,7 @@
   <p>Annotations can currently be set to be either public or private.
   Private annotations are visible only to you. You can change this setting
    this when you create or edit an annotation.</p>
-   <p>By default, annotations are private. If you want to share your annotations with 
+   <p>By default, annotations are private. If you want to share your annotations with
      the working group, please change this setting before publishing your annotation.</p>
   <p><img alt="visibility" src="${request.static_url('notes_server:static/notes-help/visibility.jpg')}"></p>
 
@@ -78,18 +78,18 @@
     annotations based on different criteria. Please use the following tags:</p>
 
   <ul>
-    <li id="tag-issue"><b>issue:</b> This indicates that your comment is a technical issues with 
-      the specification. These comments will typically be treated with the highest priority, and discussion 
+    <li id="tag-issue"><b>issue:</b> This indicates that your comment is a technical issues with
+      the specification. These comments will typically be treated with the highest priority, and discussion
       is expected, either in annotation replies or in an email thread.</li>
-    <li id="tag-editorial"><b>editorial:</b> This is used for editorial comments, such as grammar mistakes, 
+    <li id="tag-editorial"><b>editorial:</b> This is used for editorial comments, such as grammar mistakes,
       typos, and other non-normative issues with the spec.</li>
     <li id="tag-question"><b>question:</b> This tag is used for open questions or for clarification.</li>
-    <li id="tag-tests"><b>tests:</b> This indicates that the annotation marks a testable assertion. It's 
+    <li id="tag-tests"><b>tests:</b> This indicates that the annotation marks a testable assertion. It's
       useful to add tips or suggestions about how to test each assertion.</li>
-    <li id="tag-note"><b>note:</b> This is a note that may provide additional historical or contextual details 
+    <li id="tag-note"><b>note:</b> This is a note that may provide additional historical or contextual details
       for some part of the spec, usually left by the spec editors or working group members.</li>
-    <li id="tag-docs"><b>docs:</b> This tag is for indicating documentation of a technical feature. It may be 
-      used to provide a link to a documentation page, such as WebPlatform Docs, or indicate that a feature 
+    <li id="tag-docs"><b>docs:</b> This tag is for indicating documentation of a technical feature. It may be
+      used to provide a link to a documentation page, such as WebPlatform Docs, or indicate that a feature
       needs specific documentation to be useful to designers or developers.</li>
   </ul>
 
@@ -163,34 +163,34 @@
 
   <h3 id="stream">The Notes stream</h3>
   <p>In addition to viewing annotations in the sidebar of a spec, you can also
-    view all annotations being made on any spec on the 
+    view all annotations being made on any spec on the
     <a href="https://notes.webplatform.org/stream">Notes.WebPlatform.org</a> site. You can
     filter by tags, by users, by specs, or by keywords.</p>
 
 
 
   <h2 id="feedback">Submitting Feedback</h2>
-  <p>Feel free to post questions, comments, or suggestions on the 
+  <p>Feel free to post questions, comments, or suggestions on the
     <a href="mailto:public-spec-annotation-help@w3.org">public-spec-annotation-help@w3.org mailing list</a>.</p>
 
 
   <h2 id="ack">Acknowledgments</h2>
   <h3 id="web-annotation-wg">Thanks to Web Annotation WG and Open Annotation CG</h3>
-  <p>The work that we're doing on web annotations is simultaneously being standardized in the 
-    <a href="http://www.w3.org/annotation/">Web Annotation Working Group</a>, and is based in part on the 
+  <p>The work that we're doing on web annotations is simultaneously being standardized in the
+    <a href="http://www.w3.org/annotation/">Web Annotation Working Group</a>, and is based in part on the
     data model work by the <a href="http://www.w3.org/community/openannotation/">Open Annotation Community Group</a>.</p>
-  <p>If you are interested in web annotations, please consider joining the 
+  <p>If you are interested in web annotations, please consider joining the
     <a href="http://www.w3.org/annotation/">Web Annotation WG</a>.</p>
 
   <h3 id="hypothesis">Thanks to Hypothes.is</h3>
-  <p>The web annotation software we're using for the client-side and server-side is 
-    <a href="https://hypothes.is/">Hypothes.is Annotator</a>. They have been very generous with their time in 
+  <p>The web annotation software we're using for the client-side and server-side is
+    <a href="https://hypothes.is/">Hypothes.is Annotator</a>. They have been very generous with their time in
     making spec annotation possible.</p>
 
   <h3 id="others">All other annotation projects</h3>
-  <p>There are many other annotation projects on the web, some of which are already participating in the 
+  <p>There are many other annotation projects on the web, some of which are already participating in the
     standardization work in the Web Annotation WG.</p>
-  <p>One of our goals is interoperability of implementations and open sharing of annotations, so we welcome 
-    other annotation systems or services to join in this spec annotation experiment. If you are interested in 
-    participating in this project, please join the 
+  <p>One of our goals is interoperability of implementations and open sharing of annotations, so we welcome
+    other annotation systems or services to join in this spec annotation experiment. If you are interested in
+    participating in this project, please join the
     <a href="http://www.w3.org/community/spec-annotation/">Spec Annotation Community Group</a>.</p>
