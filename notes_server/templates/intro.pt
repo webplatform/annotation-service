@@ -159,7 +159,7 @@
   <p>The sort control changes how the annotations are sorted. Currently
   you can sort annotations by location in document (i.e. they fall roughly where they lie
   in the text), newest, and oldest.<br>
-  <img src="${request.static_url('notes_server:static/notes-help/sortcontroll.jpg')}" alt="sortcontroll">
+  <img src="${request.static_url('notes_server:static/notes-help/sortcontrol.jpg')}" alt="sort control">
 
   <h3 id="stream">The Notes stream</h3>
   <p>In addition to viewing annotations in the sidebar of a spec, you can also
