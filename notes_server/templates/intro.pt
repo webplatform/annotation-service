@@ -31,7 +31,7 @@
   <p>If you’re on a supported spec, you will see a small “comment” icon on the upper
     right, near the scrollbar. To open the annotation sidebar, simply click on this button. To close it, click on it again
     or click anywhere on the page outside of the sidebar.</p>
-  <img alt="" src="${request.static_url('notes_server:static/notes-help/opensidebar.png')}">
+  <img alt="open sidebar" src="${request.static_url('notes_server:static/notes-help/opensidebar.png')}">
 
   <h3 id="create-account">Creating an account:</h3>
   <h4 id="account-sidebar">From the sidebar:</h4>
@@ -43,7 +43,7 @@
   <p>You can create an account directly on <a href="https://accounts.webplatform.org/signup">accounts.WebPlatform.org</a>.</p>
   <p>If you already have an account on WebPlatform.org, you should be able to sign in without creating a new account.</p>
 
-  <h3 id="">Forgotten Password?</h3>
+  <h3 id="forgot-password">Forgotten Password?</h3>
   <p>Click “Forgot password?” on the sign-in dialog and enter the email address you signed up for your account with.<br>
     <img alt="sign-in dialog" src="${request.static_url('notes_server:static/notes-help/sign-in.png')}">
   </p>
@@ -64,13 +64,17 @@
   markdown <a href="http://en.wikipedia.org/wiki/Markdown">here</a>.<br>
   <img alt="annotating" src="${request.static_url('notes_server:static/notes-help/annotating.jpg')}"></p>
 
-  <h3 id="private-vs-public">Private vs Public Annotations</h3>
-  <p>Annotations can currently be set to be either public or private.
+  <h3 id="public-vs-private">Public vs Private Annotations</h3>
+  <p>You can set your annotations to be publicly visible, or private.
   Private annotations are visible only to you. You can change this setting
    this when you create or edit an annotation.</p>
-   <p>By default, annotations are private. If you want to share your annotations with
-     the working group, please change this setting before publishing your annotation.</p>
+   <p>By default, annotations are public, so that your annotations can be seen by the working group. 
+   If you want to keep your annotations to yourself, please change this setting before publishing your 
+   annotation. You can change your private annotations to public by editing your annotation.</p>
   <p><img alt="visibility" src="${request.static_url('notes_server:static/notes-help/visibility.jpg')}"></p>
+  
+  <p>A future “groups” feature is planned that will let you share your annotations with a set of people 
+  of your choice, such as other participants in a working group, co-workers, or a specific community.</p>
 
   <h3 id="tagging">Tagging</h3>
   <p>Tagging your annotations is very important. This helps the working group
