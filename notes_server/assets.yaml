@@ -14,3 +14,43 @@ inject:
 webplatform-callback:
   contents:
     - notes_server:static/scripts/callback.js
+
+# Copy-paste of h/h/assets.yaml at app_js.
+# Ideally it would contain exclusively the line we need.
+# See thread at webplatform/notes-server/issues#27
+app_js:
+  output: scripts/app.min.js
+  contents:
+    - angular_tags_input
+    - gettext
+    - annotator
+    - annotator_auth
+    - annotator_bridge
+    - annotator_discovery
+    - annotator_document
+    - annotator_permissions
+    - annotator_store
+    - annotator_threading
+    - jschannel
+    - jwz
+    - h:static/scripts/vendor/katex/katex.min.js
+    - momentjs
+    - pagedown
+    - autofill
+    - sockjs
+    - uuid
+    - filters: uglifyjs
+      contents:
+        - filters: coffeescript
+          output: scripts/app.js
+          contents:
+            - h:static/scripts/app.coffee
+            - notes_server:static/scripts/controllers.coffee
+            - h:static/scripts/directives.coffee
+            - h:static/scripts/directives/*.coffee
+            - h:static/scripts/filters.coffee
+            - h:static/scripts/searchfilters.coffee
+            - h:static/scripts/services.coffee
+            - h:static/scripts/socket.coffee
+            - h:static/scripts/streamsearch.coffee
+            - h:static/scripts/*-service.coffee
