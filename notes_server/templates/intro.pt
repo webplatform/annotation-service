@@ -3,6 +3,7 @@
     .important {
       font-weight: bold;
       text-transform: uppercase;
+      }
   </style>
 
   <p>The spec annotation tool is an experiment by the WebPlatform.org team and <a href="#ack">partners</a>
@@ -189,7 +190,7 @@
     <li>Summarize your issue concisely; if others have followup questions, they can reply to your annotation.</li>
     <li>Only talk about one issue per annotation.</li>
     <li>If you have a suggestion for how to resolve the issue, such as proposed wording, state that in your annotation.</li>
-    <li>Tag your annotation appropriately (see <a href="#tagging">tagging, above</a>.</li>
+    <li>Tag your annotation appropriately (see <a href="#tagging">tagging, above</a>).</li>
     <li>As always, be polite and helpful. Abusive comments will be moderated.</li>
   </ul>
   
