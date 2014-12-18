@@ -1,4 +1,9 @@
-  <style> .page h4 { font-size: 1.19em; } /* temporary override */</style>
+  <style> 
+    .page h4 { font-size: 1.19em; } /* temporary override */
+    .important {
+      font-weight: bold;
+      text-transform: uppercase;
+  </style>
 
   <p>The spec annotation tool is an experiment by the WebPlatform.org team and <a href="#ack">partners</a>
     to make it easier for the average developer or designer to provide important feedback to technical specifications,
@@ -16,7 +21,8 @@
   <p>For general information about the tool, please visit the
     <a href="http://www.w3.org/community/spec-annotation/">Spec Annotation Community Group</a>, where you can read more
     about the details and roadmap for the project, join the CG, request features, or learn how to get involved in
-    helping improve the annotation tool.</p>
+    helping improve the annotation tool. You can also file issues on our 
+    <a href="https://github.com/webplatform/annotation-service">Gihub account, WebPlatform/annotation-service</a>.</p>
 
   <p>The spec annotation tool is currently available on selected specs located on W3.org and Specs.WebPlatform.org.
     Annotations are visible in the sidebar of the specs or on the
@@ -34,6 +40,9 @@
   <img alt="open sidebar" src="${request.static_url('notes_server:static/notes-help/opensidebar.png')}">
 
   <h3 id="create-account">Creating an account:</h3>
+  <p><b class="important">Important:</b> Though you may be annotating a spec at W3.org, the annotation service 
+  <b class="important">does not use W3C login information</b>. Please use your WebPlatform.org login credentials instead.</p>
+  
   <h4 id="account-sidebar">From the sidebar:</h4>
   <p>Click “Sign in”, and a login dialog will open. Click on the “Create an account” link to create an account. When you
     receive the confirmation email, click the link inside. You are now ready to annotate.</p>
@@ -171,13 +180,44 @@
     <a href="https://notes.webplatform.org/stream">Notes.WebPlatform.org</a> site. You can
     filter by tags, by users, by specs, or by keywords.</p>
 
+  <h23 id="spec-comments">Commenting best practices</h2>
+  <p>When leaving feedback on a specification, you should follow these basic guidelines:</p>
+  <ul>
+    <li>Make sure that someone else hasn't already made the same comment. If you find an annotation 
+      about your issue, reply to that annotation with any more information.</li>
+    <li>Be clear about which part of the spec you're commenting on (annotations make this easy!)</li>
+    <li>Summarize your issue concisely; if others have followup questions, they can reply to your annotation.</li>
+    <li>Only talk about one issue per annotation.</li>
+    <li>If you have a suggestion for how to resolve the issue, such as proposed wording, state that in your annotation.</li>
+    <li>Tag your annotation appropriately (see <a href="#tagging">tagging, above</a>.</li>
+    <li>As always, be polite and helpful. Abusive comments will be moderated.</li>
+  </ul>
+  
 
-
-  <h2 id="feedback">Submitting Feedback</h2>
+  <h2 id="feedback">Submitting feedback about this annotation service</h2>
   <p>Feel free to post questions, comments, or suggestions on the
     <a href="mailto:public-spec-annotation-help@w3.org">public-spec-annotation-help@w3.org mailing list</a>.</p>
 
-
+  <h2 id="about">About the WebPlatform project</h2>
+  <p>WebPlatform.org is a community project, sponsored by the 
+  <a href="http://webplatform.org/stewards/">WebPlatform stewards/</a>, and run by W3C team and volunteers.
+  Our goal is to increase the participation of developers and designers in the standards development process.
+  </p>
+  
+  <h2 id="policies">Annotation service policies</h2>
+  <p>This annotation experiment adheres to W3C's 
+  <a href="http://www.w3.org/Consortium/Legal/privacy-statement-20140324">privacy policy</a>. We do not use 
+  cookies or track usage, and we only require login to make an annotation.</p>
+  
+  <p>Annotations are subject to moderation. Any annotations that are spam, trolling, abusive, or use rude language, 
+    will be edited or deleted, and the account suspended.</p>
+  
+  <p>This is an experiment, and we do not guarantee persistence of the annotation service. While the 
+  service is running, all annotations will be stored on the 
+  <a href="https://notes.webplatform.org/">Notes.WebPlatform.org server</a>.
+  For long-term persistence, we will also archive all annotations on the dedicated 
+  <a href="http://lists.w3.org/">W3C email lists</a> for that specification.</p>  
+    
   <h2 id="ack">Acknowledgments</h2>
   <h3 id="web-annotation-wg">Thanks to Web Annotation WG and Open Annotation CG</h3>
   <p>The work that we're doing on web annotations is simultaneously being standardized in the
@@ -198,3 +238,13 @@
     other annotation systems or services to join in this spec annotation experiment. If you are interested in
     participating in this project, please join the
     <a href="http://www.w3.org/community/spec-annotation/">Spec Annotation Community Group</a>.</p>
+
+  <h3 id="mozilla">Thanks to Mozilla's Firefox Accounts team</h3>
+  <p>For secure (OAuth2+SSL) authentication across domains, we use the 
+  <a href="https://developer.mozilla.org/en-US/Firefox_Accounts">Firefox Accounts (FxA)</a> software
+    created by Mozilla.
+  </p>
+  
+  <h3 id="w3c">Thanks to W3C</h3>
+  <p>Thanks to the other W3C team (outside the WebPlatform project) for review and suggestions, and for
+  letting us host this experimental interface on W3C specs!</p>
