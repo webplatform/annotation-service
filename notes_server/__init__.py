@@ -163,6 +163,9 @@ def includeme(config):
     config.override_asset('h:templates/home.pt',
                           'notes_server:templates/home.pt')
 
+    config.override_asset('h:templates/app.pt',
+                          'notes_server:templates/app.pt')
+
     config.scan(__name__)
 
 
