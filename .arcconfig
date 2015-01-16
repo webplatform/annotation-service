@@ -1,5 +1,5 @@
 {
-  "project.name": "Annotation service",
+  "project.name": "annotation_service",
   "phabricator.uri": "https://source.webplatform.org/",
   "repository.callsign": "A"
 }
