@@ -1,4 +1,4 @@
 {
-  "phabricator.uri": "https://source.webplatform.org/",
+  "phabricator.uri": "https://source.webplatform.org/api/",
   "repository.callsign": "A"
 }
