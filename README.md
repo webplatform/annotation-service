@@ -17,6 +17,12 @@ $ ./bootstrap
 $ ./run
 ```
 
+To use same environment as in production you can use `run` script in this way:
+
+```shell
+source bin/activate;./run --reload --paste production.ini --log-config production.ini
+```
+
 ## Environment variables
 
 Some configuration options are available in the following files and
