@@ -41,7 +41,7 @@ def reply_to(uri):
 
 def valid_recipients(unvalidated, uri):
     domain = urlparse(uri).hostname
-    if re.search(r'(\.|^)(w3|webplatform(staging)?)\.org$', domain):
+    if re.search(r'^(w3c\.github\.io|(docs\.|specs\.|www\.)webplatform(staging)?\.org|(www\.|)w3\.org)$', domain):
         return unvalidated
     domain = re.sub(r'^(www\.)?', '', domain)
     domain_re = '@{}$'.format(re.escape(domain))
